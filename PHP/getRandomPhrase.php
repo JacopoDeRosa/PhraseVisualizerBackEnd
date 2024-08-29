@@ -6,25 +6,25 @@ if ((!$headers["AppKey"]) || $headers["AppKey"] != "d4m0cl3s") {
   exit("Invalid key in header");
 }
 
-$phrase = $_POST["phrase"];
-
 $servername = "localhost";
 $username = 'root';
 $password = 'root';
-$dbname = 'phrases';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, "phrases");
 
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
-}
+}  
 
-$sql = "INSERT INTO phrases (phrase) VALUES ('$phrase')";
+$sql = "SELECT phrase FROM phrases ORDER BY RAND() LIMIT 1";
 
-if ($conn->query($sql) === TRUE) {
-  echo "New record created successfully";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  $row = $result->fetch_assoc();
+  echo $row["phrase"];
 } else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
+  echo "0 results";
 }
 
 ?>

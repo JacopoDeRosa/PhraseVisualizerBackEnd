@@ -1,72 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MappingTest</title>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-</head>
-<body>
-    <h1>Start with Vue</h1>
-    <div id="app">
-        {{ message }}
-        <br><br>
-        <p>You typed: {{ messToSend}}</p>
-        <button @click="handleChangeStatus">Change Status</button>
-        <br><br>
-    <input type="text" v-model="messToSend">
-    </div>
-
-    <script type="module">
-        import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
-
-        createApp({
-            setup() {
-                const message = ref('Hello Vue!')
-                const messToSend = ref('')
-                const getMessage = () => {
-                    displayMessage.value = `You entered: ${messToSend.value}`
-                }
-                
-                const handleChangeStatus = async () => {
-                    alert("Sending message to the server...")
-
-                    const postBody = new URLSearchParams();
-
-                    // Use Append to add the data to the body of the request
-                    postBody.append('phrase', messToSend.value);
-
-                    try {
-                        // Send a POST request to the server with the correct content type
-                        const response = await fetch('http://localhost/PHP/postPhrase.php', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded',
-                                'AppKey': 'd4m0cl3s'
-                            },
-                            body: postBody.toString()
-                        })
- 
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok')
-                        }
-
-                        const responseData = await response.text()
-                        console.log('Server response:', responseData)
-                        message.value = responseData
-
-                    } catch (error) {
-                        console.error('An error occurred:', error)
-                        message.value = error;
-                    }
-                }
-
-                return {
-                    message,
-                    handleChangeStatus,getMessage,messToSend,message
-                }
-            }
-        }).mount('#app')
-    </script>
-</body>
+    <title>Vite App</title>
+    <script type="module" crossorigin src="/assets/index-esTu9lW1.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DMn3eA8q.css">
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
 </html>

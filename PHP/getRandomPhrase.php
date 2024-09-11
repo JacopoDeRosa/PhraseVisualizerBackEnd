@@ -7,16 +7,18 @@ if ((!$headers["AppKey"]) || $headers["AppKey"] != "d4m0cl3s") {
 }
 
 $servername = "localhost";
-$username = 'root';
-$password = 'root';
+$username = 'damocles';
+$password = 'QJVI.7EPTbiXMEpL';
+$dbname = 'phrases';
 
-$conn = new mysqli($servername, $username, $password, "phrases");
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }  
 
-$sql = "SELECT phrase FROM phrases ORDER BY RAND() LIMIT 1";
+// Select a random phrase from the database from the table valid_phrases, only selected phrases where the 'insertion' date is less than 1 day old
+$sql = "SELECT phrase FROM `valid_phrases` WHERE `insertion` > DATE_SUB(NOW(), INTERVAL 1 DAY) ORDER BY RAND() LIMIT 1";
 
 $result = $conn->query($sql);
 
